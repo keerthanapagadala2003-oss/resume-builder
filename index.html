@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Resume Builder</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #eef1f6;
+  color: #333;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+header {
+  text-align: center;
+  color: #294c7a;
+}
+
+.builder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.form, .resume {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #ddd;
+}
+
+.form h2 {
+  color: #294c7a;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 11px;
+  margin: 7px 0 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+}
+
+textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
+label {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  margin: 5px 3px;
+  font-size: 14px;
+}
+
+.generate {
+  width: 100%;
+  background: #294c7a;
+  color: white;
+  font-weight: bold;
+}
+
+.download {
+  background: #198754;
+  color: white;
+}
+
+.clear {
+  background: #dc3545;
+  color: white;
+}
+
+.resume {
+  min-height: 650px;
+  color: #333;
+}
+
+.resume h1 {
+  color: #294c7a;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+.resume h3 {
+  color: #294c7a;
+  border-bottom: 1px solid #294c7a;
+  padding-bottom: 5px;
+  margin-top: 23px;
+}
+
+.resume p {
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.resume ul {
+  padding-left: 20px;
+}
+
+.resume li {
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+
+.contact {
+  color: #666;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+@media(max-width: 700px) {
+  .builder {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+
+  header, .form, .actions {
+    display: none !important;
+  }
+
+  .container {
+    max-width: none;
+  }
+
+  .builder {
+    display: block;
+  }
+
+  .resume {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 25px;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .resume h1 {
+    font-size: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+  <h1>📄 Resume Builder</h1>
+  <p>Create your professional resume easily!</p>
+</header>
+
+<div class="builder">
+
+<div class="form">
+
+<h2>Personal Details</h2>
+
+<label>Full Name</label>
+<input id="name" placeholder="Enter your full name">
+
+<label>Email</label>
+<input id="email" type="email" placeholder="Enter email">
+
+<label>Phone Number</label>
+<input id="phone" placeholder="Enter phone number">
+
+<label>Address</label>
+<input id="address" placeholder="Enter your address">
+
+<label>Professional Title</label>
+<input id="title" placeholder="Example: Fresher / Software Developer">
+
+<h2>Career Objective</h2>
+<textarea id="objective"
+placeholder="Write your career objective"></textarea>
+
+<h2>Education</h2>
+<textarea id="education"
+placeholder="B.Tech - College Name - Year - Percentage&#10;Intermediate - College Name - Year - Marks&#10;SSC - School Name - Year - GPA"></textarea>
+
+<h2>Technical Skills</h2>
+<textarea id="skills"
+placeholder="HTML, CSS, JavaScript, MS Office..."></textarea>
+
+<h2>Projects</h2>
+<textarea id="projects"
+placeholder="Project name and short description"></textarea>
+
+<h2>Work Experience</h2>
+<textarea id="experience"
+placeholder="Company name, job role and responsibilities (if any)"></textarea>
+
+<h2>Certifications</h2>
+<textarea id="certificates"
+placeholder="Enter your certificates"></textarea>
+
+<button class="generate" onclick="generateResume()">
+Generate Resume
+</button>
+
+<div class="actions">
+<button class="download" onclick="downloadResume()">
+Download PDF
+</button>
+
+<button class="clear" onclick="clearForm()">
+Clear All
+</button>
+</div>
+
+</div>
+
+<div class="resume" id="resume">
+
+<h1 id="rName">Your Name</h1>
+
+<p id="rTitle">Professional Title</p>
+
+<p class="contact" id="rContact">
+Email | Phone | Address
+</p>
+
+<h3>Career Objective</h3>
+<p id="rObjective">Your career objective will appear here.</p>
+
+<h3>Education</h3>
+<p id="rEducation">Your education details will appear here.</p>
+
+<h3>Technical Skills</h3>
+<p id="rSkills">Your skills will appear here.</p>
+
+<h3>Projects</h3>
+<p id="rProjects">Your projects will appear here.</p>
+
+<h3>Work Experience</h3>
+<p id="rExperience">Your experience will appear here.</p>
+
+<h3>Certifications</h3>
+<p id="rCertificates">Your certifications will appear here.</p>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+function getValue(id, fallback) {
+  const value = document.getElementById(id).value.trim();
+  return value || fallback;
+}
+
+function generateResume() {
+
+  document.getElementById("rName").textContent =
+    getValue("name", "Your Name");
+
+  document.getElementById("rTitle").textContent =
+    getValue("title", "Professional Title");
+
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  document.getElementById("rContact").textContent =
+    [email, phone, address].filter(Boolean).join(" | ") ||
+    "Email | Phone | Address";
+
+  document.getElementById("rObjective").textContent =
+    getValue("objective", "Your career objective will appear here.");
+
+  document.getElementById("rEducation").textContent =
+    getValue("education", "Your education details will appear here.");
+
+  document.getElementById("rSkills").textContent =
+    getValue("skills", "Your skills will appear here.");
+
+  document.getElementById("rProjects").textContent =
+    getValue("projects", "Your projects will appear here.");
+
+  document.getElementById("rExperience").textContent =
+    getValue("experience", "Your experience will appear here.");
+
+  document.getElementById("rCertificates").textContent =
+    getValue("certificates", "Your certifications will appear here.");
+}
+
+function downloadResume() {
+  generateResume();
+  window.print();
+}
+
+function clearForm() {
+
+  if (!confirm("Are you sure you want to clear all details?")) {
+    return;
+  }
+
+  document.querySelectorAll(".form input, .form textarea")
+    .forEach(input => input.value = "");
+
+  generateResume();
+}
+
+</script>
+
+</body>
+</html>
